@@ -442,7 +442,7 @@
             object-fit: cover;
         }
 
-        /* Responsive */
+        /* Responsive - Tablet */
         @media (max-width: 1200px) {
             html, body { height: auto; overflow: auto; }
             .dashboard {
@@ -462,14 +462,132 @@
             .projects-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
+        /* Responsive - Mobile with horizontal scroll sections */
         @media (max-width: 768px) {
             body { padding: 8px; }
-            .nav-links { display: none; }
-            .photo-card { grid-column: 1 / 13; min-height: 300px; }
-            .intro-card { grid-column: 1 / 13; }
-            .available-card, .contact-card { grid-column: 1 / 13; }
-            .cta-card { grid-column: 1 / 13; flex-direction: column; gap: 16px; text-align: center; }
-            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            
+            .dashboard {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                height: auto;
+            }
+            
+            /* Nav stays full width */
+            .nav-card { 
+                width: 100%;
+                padding: 8px 16px;
+            }
+            
+            .nav-avatar {
+                width: 40px;
+                height: 40px;
+                left: 16px;
+            }
+            
+            .logo {
+                font-size: 1rem;
+            }
+            
+            /* Horizontal scroll section 1: Photo + Intro */
+            .photo-card, .intro-card {
+                flex: 0 0 85vw;
+                min-height: 280px;
+                scroll-snap-align: start;
+            }
+            
+            .photo-card {
+                order: 1;
+            }
+            
+            .intro-card {
+                order: 2;
+            }
+            
+            /* Horizontal scroll section 2: Available + Contact */
+            .available-card, .contact-card {
+                flex: 0 0 85vw;
+                scroll-snap-align: start;
+            }
+            
+            .available-card {
+                order: 3;
+                min-height: 80px;
+            }
+            
+            .contact-card {
+                order: 4;
+                min-height: 160px;
+            }
+            
+            /* CTA full width */
+            .cta-card {
+                order: 5;
+                width: 100%;
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+                padding: 20px;
+            }
+            
+            /* Projects with horizontal scroll cards */
+            .projects-card {
+                order: 6;
+                width: 100%;
+                padding: 20px;
+                min-height: auto;
+            }
+            
+            .projects-grid {
+                display: flex;
+                gap: 12px;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 10px;
+                height: auto;
+            }
+            
+            .projects-grid::-webkit-scrollbar {
+                height: 4px;
+            }
+            
+            .project-item {
+                flex: 0 0 70vw;
+                min-height: 150px;
+                scroll-snap-align: start;
+            }
+            
+            /* Photo 2 full width */
+            .photo-card-2 {
+                order: 7;
+                width: 100%;
+                min-height: 300px;
+            }
+            
+            /* Create scroll containers */
+            .mobile-scroll-section {
+                display: flex;
+                gap: 10px;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 10px;
+            }
+            
+            .intro-card .statement-text {
+                font-size: 1rem;
+            }
+            
+            .intro-card .tools-row {
+                flex-wrap: wrap;
+            }
+            
+            .intro-card .tool-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 0.7rem;
+            }
         }
 
         ::selection {
