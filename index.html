@@ -60,7 +60,7 @@
             height: 100%;
             display: grid;
             grid-template-columns: repeat(24, 1fr);
-            grid-template-rows: repeat(12, 1fr);
+            grid-template-rows: repeat(14, 1fr);
             gap: 10px;
         }
 
@@ -168,7 +168,7 @@
         /* === PHOTO === */
         .photo-card {
             grid-column: 1 / 5;
-            grid-row: 2 / 6;
+            grid-row: 2 / 7;
             padding: 0;
             overflow: hidden;
         }
@@ -183,17 +183,17 @@
         /* === INTRO === */
         .intro-card {
             grid-column: 5 / 17;
-            grid-row: 2 / 5;
+            grid-row: 2 / 7;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 32px;
+            padding: 24px;
             background: var(--bg-card-alt);
         }
 
         .intro-card .statement-text {
-            font-size: clamp(1.1rem, 1.7vw, 1.35rem);
-            line-height: 1.55;
+            font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+            line-height: 1.5;
         }
 
         .intro-card .tools-row {
@@ -203,13 +203,13 @@
         }
 
         .intro-card .tool-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 500;
             color: #1a1a1a;
             transition: all 0.3s;
@@ -234,7 +234,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 16px;
+            padding: 12px;
         }
 
         .available-dot {
@@ -258,7 +258,7 @@
         /* === CONTACT === */
         .contact-card {
             grid-column: 17 / 25;
-            grid-row: 3 / 5;
+            grid-row: 3 / 7;
             padding: 28px;
             display: flex;
             flex-direction: column;
@@ -324,13 +324,13 @@
 
         /* === CTA (matcha accent) === */
         .cta-card {
-            grid-column: 5 / 25;
-            grid-row: 5 / 6;
+            grid-column: 1 / 25;
+            grid-row: 7 / 9;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            padding: 24px 32px;
+            padding: 20px 32px;
         }
 
         .cta-title {
@@ -366,7 +366,7 @@
         /* === PROJECTS === */
         .projects-card {
             grid-column: 1 / 19;
-            grid-row: 6 / 13;
+            grid-row: 9 / 15;
             padding: 28px;
         }
 
@@ -431,7 +431,7 @@
         /* === PHOTO 2 === */
         .photo-card-2 {
             grid-column: 19 / 25;
-            grid-row: 6 / 13;
+            grid-row: 9 / 15;
             padding: 0;
             overflow: hidden;
         }
@@ -464,60 +464,124 @@
 
         /* Responsive - Mobile with horizontal scroll sections */
         @media (max-width: 768px) {
-            body { padding: 8px; }
+            body { padding: 10px; }
             
             .dashboard {
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
+                gap: 8px;
                 height: auto;
+            }
+            
+            .card {
+                padding: 16px;
+                border-radius: 18px;
             }
             
             /* Nav stays full width */
             .nav-card { 
                 width: 100%;
-                padding: 8px 16px;
+                padding: 12px 16px;
+                min-height: 50px;
             }
             
             .nav-avatar {
-                width: 40px;
-                height: 40px;
+                width: 32px;
+                height: 32px;
                 left: 16px;
             }
             
             .logo {
-                font-size: 1rem;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
             }
             
-            /* Horizontal scroll section 1: Photo + Intro */
-            .photo-card, .intro-card {
-                flex: 0 0 85vw;
-                min-height: 280px;
-                scroll-snap-align: start;
+            .theme-toggle {
+                width: 30px;
+                height: 30px;
+                right: 16px;
+                font-size: 0.85rem;
             }
             
+            /* Photo card */
             .photo-card {
                 order: 1;
+                width: 100%;
+                min-height: 250px;
+                max-height: 300px;
             }
             
+            /* Intro card */
             .intro-card {
                 order: 2;
+                width: 100%;
+                padding: 20px;
             }
             
-            /* Horizontal scroll section 2: Available + Contact */
-            .available-card, .contact-card {
-                flex: 0 0 85vw;
-                scroll-snap-align: start;
+            .intro-card .statement-text {
+                font-size: 0.9rem;
+                line-height: 1.5;
             }
             
+            .intro-card .tools-row {
+                margin-top: 16px;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+            
+            .intro-card .tool-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 0.55rem;
+            }
+            
+            .pill-label {
+                padding: 5px 10px;
+                font-size: 0.5rem;
+                margin-bottom: 10px;
+            }
+            
+            /* Available card */
             .available-card {
                 order: 3;
-                min-height: 80px;
+                width: 100%;
+                min-height: 50px;
+                padding: 12px;
             }
             
+            .available-text {
+                font-size: 0.7rem;
+            }
+            
+            /* Contact card */
             .contact-card {
                 order: 4;
-                min-height: 160px;
+                width: 100%;
+                padding: 20px;
+            }
+            
+            .contact-content {
+                margin-top: 12px;
+                gap: 20px;
+            }
+            
+            .contact-label {
+                font-size: 0.5rem;
+            }
+            
+            .contact-value {
+                font-size: 0.8rem;
+            }
+            
+            .contact-socials {
+                margin-top: 16px;
+                gap: 12px;
+            }
+            
+            .social-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 0.7rem;
             }
             
             /* CTA full width */
@@ -525,68 +589,71 @@
                 order: 5;
                 width: 100%;
                 flex-direction: column;
-                gap: 16px;
+                gap: 12px;
                 text-align: center;
-                padding: 20px;
+                padding: 18px;
+            }
+            
+            .cta-title {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 10px 18px;
+                font-size: 0.7rem;
             }
             
             /* Projects with horizontal scroll cards */
             .projects-card {
                 order: 6;
                 width: 100%;
-                padding: 20px;
-                min-height: auto;
+                padding: 16px;
             }
             
             .projects-grid {
                 display: flex;
-                gap: 12px;
+                gap: 10px;
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
-                padding-bottom: 10px;
+                padding-bottom: 8px;
                 height: auto;
             }
             
             .projects-grid::-webkit-scrollbar {
-                height: 4px;
+                height: 3px;
             }
             
             .project-item {
-                flex: 0 0 70vw;
-                min-height: 150px;
+                flex: 0 0 65vw;
+                min-height: 140px;
+                padding: 14px;
                 scroll-snap-align: start;
+            }
+            
+            .project-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .project-num {
+                font-size: 0.45rem;
+            }
+            
+            .project-name {
+                font-size: 0.8rem;
+            }
+            
+            .project-cat {
+                font-size: 0.5rem;
             }
             
             /* Photo 2 full width */
             .photo-card-2 {
                 order: 7;
                 width: 100%;
-                min-height: 300px;
-            }
-            
-            /* Create scroll containers */
-            .mobile-scroll-section {
-                display: flex;
-                gap: 10px;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-                padding-bottom: 10px;
-            }
-            
-            .intro-card .statement-text {
-                font-size: 1rem;
-            }
-            
-            .intro-card .tools-row {
-                flex-wrap: wrap;
-            }
-            
-            .intro-card .tool-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 0.7rem;
+                min-height: 220px;
+                max-height: 280px;
             }
         }
 
