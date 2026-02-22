@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diana Letzner — Visual Creative</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --matcha: #a8b87c;
+            --matcha-1: #c4d4a0;
+            --matcha-2: #b6c68e;
+            --matcha-3: #a8b87c;
+            --matcha-4: #95a566;
+            --matcha-5: #829252;
+            --available-green: #22c55e;
+        }
+
+        [data-theme="light"] {
+            --bg: #e8e8e8;
+            --bg-card: #f5f5f5;
+            --bg-card-alt: #ebebeb;
+            --text: #1a1a1a;
+            --text-muted: #737373;
+            --border: #d4d4d4;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0a0a0a;
+            --bg-card: #171717;
+            --bg-card-alt: #1f1f1f;
+            --text: #fafafa;
+            --text-muted: #a3a3a3;
+            --border: #2e2e2e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            background: var(--bg);
+            color: var(--text);
+            padding: 10px;
+            transition: background 0.4s, color 0.4s;
+        }
+
+        .dashboard {
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(24, 1fr);
+            grid-template-rows: 48px 1fr 1fr 1fr 1fr 1fr 60px 1fr 1fr 1fr 1fr 1fr;
+            gap: 8px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 16px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="dark"] .card:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .pill-label {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--bg);
+            border-radius: 50px;
+            font-size: 0.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .statement-text {
+            font-weight: 300;
+            line-height: 1.45;
+        }
+
+        .statement-text .muted {
+            opacity: 0.5;
+        }
+
+        .card-matcha {
+            background: var(--matcha);
+            color: #1a1a1a;
+        }
+
+        .card-matcha .pill-label {
+            background: rgba(255,255,255,0.3);
+            color: #1a1a1a;
+        }
+
+        .nav-card {
+            grid-column: 1 / 25;
+            grid-row: 1 / 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 20px;
+            border-radius: 16px;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-avatar {
+            width: 36px;
+            height: 36px;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .theme-toggle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: transparent;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--text);
+            color: var(--bg);
+            border-color: var(--text);
+        }
+
+        .photo-card {
+            grid-column: 1 / 5;
+            grid-row: 2 / 7;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        .intro-card {
+            grid-column: 5 / 17;
+            grid-row: 2 / 7;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            background: var(--bg-card-alt);
+        }
+
+        .intro-card .statement-text {
+            font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+            line-height: 1.5;
+        }
+
+        .intro-card .tools-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .intro-card .tool-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            transition: all 0.3s;
+        }
+
+        .intro-card .tool-icon:nth-child(1) { background: var(--matcha-1); }
+        .intro-card .tool-icon:nth-child(2) { background: var(--matcha-2); }
+        .intro-card .tool-icon:nth-child(3) { background: var(--matcha-3); }
+        .intro-card .tool-icon:nth-child(4) { background: var(--matcha-4); }
+        .intro-card .tool-icon:nth-child(5) { background: var(--matcha-5); }
+
+        .intro-card .tool-icon:hover {
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        .available-card {
+            grid-column: 17 / 25;
+            grid-row: 2 / 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+        }
+
+        .available-dot {
+            width: 8px;
+            height: 8px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.85); }
+        }
+
+        .available-text {
+            font-size: 0.75rem;
+            font-weight: 400;
+        }
+
+        .contact-card {
+            grid-column: 17 / 25;
+            grid-row: 3 / 7;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1;
+            margin-top: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .contact-label {
+            font-size: 0.55rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.5;
+        }
+
+        .contact-value {
+            font-size: 0.85rem;
+            font-weight: 400;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .contact-value:hover { opacity: 0.7; }
+
+        .contact-socials {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text);
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: var(--matcha);
+            color: #1a1a1a;
+            transform: translateY(-2px);
+        }
+
+        .cta-card {
+            grid-column: 1 / 25;
+            grid-row: 7 / 8;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 28px;
+        }
+
+        .cta-title {
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.4;
+            max-width: 400px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 12px 20px;
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: fit-content;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            background: #000;
+        }
+
+        .projects-card {
+            grid-column: 1 / 19;
+            grid-row: 8 / 13;
+            padding: 20px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            height: calc(100% - 36px);
+        }
+
+        .project-item {
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--bg);
+            position: relative;
+        }
+
+        .project-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+        }
+
+        .project-item:hover .project-icon {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .project-item:hover {
+            transform: scale(1.03);
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        .project-num {
+            font-size: 0.5rem;
+            font-weight: 400;
+            opacity: 0.5;
+        }
+
+        .project-name {
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        .project-cat {
+            font-size: 0.5rem;
+            font-weight: 300;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .photo-card-2 {
+            grid-column: 19 / 25;
+            grid-row: 8 / 13;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .photo-card-2 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 1200px) {
+            html, body { height: auto; overflow: auto; }
+            .dashboard {
+                height: auto;
+                grid-template-columns: repeat(12, 1fr);
+                grid-template-rows: auto;
+                gap: 10px;
+            }
+            .nav-card { grid-column: 1 / 13; }
+            .photo-card { grid-column: 1 / 5; min-height: 280px; }
+            .intro-card { grid-column: 5 / 13; min-height: 180px; }
+            .available-card { grid-column: 1 / 7; min-height: 60px; }
+            .contact-card { grid-column: 7 / 13; min-height: 140px; }
+            .cta-card { grid-column: 1 / 13; min-height: 100px; }
+            .projects-card { grid-column: 1 / 13; min-height: 220px; }
+            .photo-card-2 { grid-column: 1 / 13; min-height: 300px; }
+            .projects-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .dashboard {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                height: auto;
+            }
+            .card {
+                padding: 16px;
+                border-radius: 18px;
+            }
+            .nav-card { 
+                width: 100%;
+                padding: 12px 16px;
+                min-height: 50px;
+            }
+            .nav-left { gap: 8px; }
+            .nav-avatar { width: 32px; height: 32px; }
+            .logo { font-size: 0.7rem; letter-spacing: 0.08em; }
+            .theme-toggle { width: 30px; height: 30px; font-size: 0.85rem; }
+            .photo-card { order: 1; width: 100%; min-height: 250px; max-height: 300px; }
+            .intro-card { order: 2; width: 100%; padding: 20px; }
+            .intro-card .statement-text { font-size: 0.9rem; line-height: 1.5; }
+            .intro-card .tools-row { margin-top: 16px; gap: 8px; flex-wrap: wrap; }
+            .intro-card .tool-icon { width: 38px; height: 38px; font-size: 0.55rem; }
+            .pill-label { padding: 5px 10px; font-size: 0.5rem; margin-bottom: 10px; }
+            .available-card { order: 3; width: 100%; min-height: 50px; padding: 12px; }
+            .available-text { font-size: 0.7rem; }
+            .contact-card { order: 4; width: 100%; padding: 20px; }
+            .contact-content { margin-top: 12px; gap: 20px; }
+            .contact-label { font-size: 0.5rem; }
+            .contact-value { font-size: 0.8rem; }
+            .contact-socials { margin-top: 16px; gap: 12px; }
+            .social-icon { width: 38px; height: 38px; font-size: 0.7rem; }
+            .cta-card { order: 5; width: 100%; flex-direction: column; gap: 12px; text-align: center; padding: 18px; }
+            .cta-title { font-size: 1rem; }
+            .cta-button { padding: 10px 18px; font-size: 0.7rem; }
+            .projects-card { order: 6; width: 100%; padding: 16px; }
+            .projects-grid {
+                display: flex;
+                gap: 10px;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 8px;
+                height: auto;
+            }
+            .projects-grid::-webkit-scrollbar { height: 3px; }
+            .project-item { flex: 0 0 65vw; min-height: 140px; padding: 14px; scroll-snap-align: start; }
+            .project-icon { width: 50px; height: 50px; }
+            .project-num { font-size: 0.45rem; }
+            .project-name { font-size: 0.8rem; }
+            .project-cat { font-size: 0.5rem; }
+            .photo-card-2 { order: 7; width: 100%; min-height: 220px; max-height: 280px; }
+        }
+
+        ::selection { background: var(--matcha); color: #1a1a1a; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Nav -->
+        <div class="card nav-card">
+            <img src="avatar.png" alt="Avatar" class="nav-avatar">
+            <div class="logo">Diana Letzner</div>
+            <button class="theme-toggle" onclick="toggleTheme()">◐</button>
+        </div>
+
+        <!-- Photo -->
+        <div class="card photo-card">
+            <img src="diana-photo.png" alt="Diana Letzner" class="profile-photo">
+        </div>
+
+        <!-- Intro -->
+        <div class="card intro-card">
+            <span class="pill-label">Get to Know Me</span>
+            <p class="statement-text">
+                Bucharest based visual creative. <span class="muted">Art by choice, creative by birth. Transforming ideas with creative flair:</span> Brand Identity, Art Direction, and Visual Design <span class="muted">for bold, memorable brands. With a keen eye for detail and a passion for storytelling, I craft visual experiences that resonate, inspire, and leave a lasting impression.</span>
+            </p>
+            <div class="tools-row">
+                <div class="tool-icon">Ai</div>
+                <div class="tool-icon">Ps</div>
+                <div class="tool-icon">Id</div>
+                <div class="tool-icon">Fg</div>
+                <div class="tool-icon">Canva</div>
+            </div>
+        </div>
+
+        <!-- Available -->
+        <div class="card available-card card-matcha">
+            <span class="available-dot"></span>
+            <span class="available-text">Available for Freelance</span>
+        </div>
+
+        <!-- Contact -->
+        <div class="card contact-card">
+            <span class="pill-label">Contact</span>
+            <div class="contact-content">
+                <div class="contact-item">
+                    <span class="contact-label">Email</span>
+                    <a href="mailto:hello@dianaletzner.com" class="contact-value">hello@dianaletzner.com</a>
+                </div>
+                <div class="contact-socials">
+                    <a href="https://linkedin.com/in/dianaletzner" class="social-icon" title="LinkedIn">in</a>
+                    <a href="https://behance.net/dianaletzner" class="social-icon" title="Behance">Bē</a>
+                    <a href="https://instagram.com" class="social-icon" title="Instagram">Ig</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA (matcha accent) -->
+        <div class="card cta-card card-matcha">
+            <p class="cta-title">Let's create something beautiful together</p>
+            <a href="mailto:hello@dianaletzner.com" class="cta-button">Get in Touch →</a>
+        </div>
+
+        <!-- Expertise/Projects -->
+        <div class="card projects-card">
+            <span class="pill-label">Expertise</span>
+            <div class="projects-grid">
+                <div class="project-item">
+                    <span class="project-num">01</span>
+                    <img src="icon-brand.png" alt="" class="project-icon">
+                    <div>
+                        <div class="project-name">Brand Identity</div>
+                        <div class="project-cat">Logo, Visual Systems, Guidelines</div>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <span class="project-num">02</span>
+                    <img src="icon-uxui.png" alt="" class="project-icon">
+                    <div>
+                        <div class="project-name">UX/UI</div>
+                        <div class="project-cat">Web Design, Apps, Prototyping</div>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <span class="project-num">03</span>
+                    <img src="icon-personal.png" alt="" class="project-icon">
+                    <div>
+                        <div class="project-name">My Personal Touch</div>
+                        <div class="project-cat">Art Direction, Creative Vision</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photo 2 -->
+        <div class="card photo-card-2">
+            <img src="diana-photo-2.png" alt="Diana Letzner">
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+        }
+    </script>
+</body>
+</html>
