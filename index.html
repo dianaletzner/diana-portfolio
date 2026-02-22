@@ -134,9 +134,19 @@
             gap: 12px;
         }
 
-        .nav-avatar {
-            width: 52px;
-            height: 52px;
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+        }
+
+        .nav-icons svg {
+            transition: color 0.3s;
+        }
+
+        .nav-icons svg:hover {
+            color: var(--text);
         }
 
         .logo {
@@ -484,7 +494,7 @@
             }
             
             .nav-left { gap: 8px; }
-            .nav-avatar { width: 32px; height: 32px; }
+            .nav-icons svg { width: 16px; height: 16px; }
             .logo { font-size: 0.7rem; letter-spacing: 0.08em; }
             .theme-toggle { width: 30px; height: 30px; font-size: 0.85rem; }
             .photo-card { order: 1; width: 100%; min-height: 250px; max-height: 300px; }
@@ -537,7 +547,11 @@
     <div class="dashboard">
         <!-- Nav -->
         <div class="card nav-card">
-            <img src="avatar.png" alt="Avatar" class="nav-avatar">
+            <div class="nav-icons">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/></svg>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/></svg>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="1.5" fill="currentColor"/></svg>
+            </div>
             <div class="logo">Diana Letzner</div>
             <button class="theme-toggle" onclick="toggleTheme()">◐</button>
         </div>
